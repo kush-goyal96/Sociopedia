@@ -1,5 +1,7 @@
+import Navbar from "scenes/navbar";
+
 const LoginPage = () => {
-  return <div>Login Page</div>;
+  return <Navbar/>;
 };
 
 export default LoginPage;
