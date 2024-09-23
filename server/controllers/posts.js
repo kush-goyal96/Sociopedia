@@ -1,7 +1,7 @@
-import Post from '../models/Post.js';
-import User from '../models/User.js';
+import Post from "../models/Post.js";
+import User from "../models/User.js";
 
-//CREATE
+/* CREATE */
 export const createPost = async (req, res) => {
   try {
     const { userId, description, picturePath } = req.body;
@@ -12,49 +12,42 @@ export const createPost = async (req, res) => {
       lastName: user.lastName,
       location: user.location,
       description,
-      userPicture: user.picturePath,
+      userPicturePath: user.picturePath,
       picturePath,
-      like: {},
+      likes: {},
       comments: [],
     });
-
     await newPost.save();
-    const allPosts = await Post.find();
 
-    res.status(201).json(allPosts);
+    const post = await Post.find();
+    res.status(201).json(post);
   } catch (err) {
-    res.status(409).json({
-      error: err.message,
-    });
+    res.status(409).json({ message: err.message });
   }
 };
 
-//READ
+/* READ */
 export const getFeedPosts = async (req, res) => {
   try {
-    const allPosts = await Post.find();
-    res.status(200).json(allPosts);
+    const post = await Post.find();
+    res.status(200).json(post);
   } catch (err) {
-    res.status(404).json({
-      error: err.message,
-    });
+    res.status(404).json({ message: err.message });
   }
 };
 
 export const getUserPosts = async (req, res) => {
   try {
     const { userId } = req.params;
-    const allPosts = await Post.find({ userId });
-    res.status(200).json(allPosts);
+    const post = await Post.find({ userId });
+    res.status(200).json(post);
   } catch (err) {
-    res.status(404).json({
-      error: err.message,
-    });
+    res.status(404).json({ message: err.message });
   }
 };
 
-//UPDATE
-export const likePosts = async (req, res) => {
+/* UPDATE */
+export const likePost = async (req, res) => {
   try {
     const { id } = req.params;
     const { userId } = req.body;
@@ -75,8 +68,6 @@ export const likePosts = async (req, res) => {
 
     res.status(200).json(updatedPost);
   } catch (err) {
-    res.status(404).json({
-      error: err.message,
-    });
+    res.status(404).json({ message: err.message });
   }
 };
