@@ -3,14 +3,14 @@ import {
   EditOutlined,
   LocationOnOutlined,
   WorkOutlineOutlined,
-} from "@mui/icons-material";
-import { Box, Typography, Divider, useTheme } from "@mui/material";
-import UserImage from "components/UserImage";
-import FlexBetween from "components/FlexBetween";
-import WidgetWrapper from "components/WidgetWrapper";
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+} from '@mui/icons-material';
+import { Box, Typography, Divider, useTheme } from '@mui/material';
+import UserImage from 'components/UserImage';
+import FlexBetween from 'components/FlexBetween';
+import WidgetWrapper from 'components/WidgetWrapper';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const UserWidget = ({ userId, picturePath }) => {
   const [user, setUser] = useState(null);
@@ -23,7 +23,7 @@ const UserWidget = ({ userId, picturePath }) => {
 
   const getUser = async () => {
     const response = await fetch(`http://localhost:3001/users/${userId}`, {
-      method: "GET",
+      method: 'GET',
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
@@ -64,9 +64,9 @@ const UserWidget = ({ userId, picturePath }) => {
               color={dark}
               fontWeight="500"
               sx={{
-                "&:hover": {
+                '&:hover': {
                   color: palette.primary.light,
-                  cursor: "pointer",
+                  cursor: 'pointer',
                 },
               }}
             >
@@ -75,7 +75,20 @@ const UserWidget = ({ userId, picturePath }) => {
             <Typography color={medium}>{friends.length} friends</Typography>
           </Box>
         </FlexBetween>
-        <ManageAccountsOutlined />
+        <div
+          style={{
+            cursor: 'pointer',
+          }}
+        >
+          <ManageAccountsOutlined
+            sx={{
+              transition: 'transform 0.3s ease-in-out',
+              '&:hover': {
+                transform: 'scale(1.2)',
+              },
+            }}
+          />
+        </div>
       </FlexBetween>
 
       <Divider />
@@ -94,7 +107,7 @@ const UserWidget = ({ userId, picturePath }) => {
 
       <Divider />
 
-      {/* THIRD ROW */}
+      {/* THIRD ROW
       <Box p="1rem 0">
         <FlexBetween mb="0.5rem">
           <Typography color={medium}>Who's viewed your profile</Typography>
@@ -110,7 +123,7 @@ const UserWidget = ({ userId, picturePath }) => {
         </FlexBetween>
       </Box>
 
-      <Divider />
+      <Divider /> */}
 
       {/* FOURTH ROW */}
       <Box p="1rem 0">
